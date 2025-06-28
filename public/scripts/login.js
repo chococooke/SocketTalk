@@ -11,15 +11,20 @@ loginForm.addEventListener("submit", async (event) => {
       password: event.target.password.value,
     };
 
+    console.log(formData);
+
     const res = await axios.post(`${baseUrl}/api/auth/login`, formData);
-    
+
     if (res.status !== 200) {
-      console.log(res);
+      console.log(res.response);
       return;
     }
 
-    localStorage.setItem("user", res.data.user);
+    console.log(res);
+
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+    window.location.href = `${baseUrl}/app`;
   } catch (err) {
-    console.error(err);
+    window.alert(err.response.data.error);
   }
 });

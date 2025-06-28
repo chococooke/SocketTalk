@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 // routes
 const authRoutes = require("./routes/auth.route.js");
@@ -20,6 +21,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 // middlewares
+app.use(express.static(path.resolve(__dirname, "public")));
 app.use(cors({ credentials: true }));
 app.use(cookieParser());
 app.use(express.json());

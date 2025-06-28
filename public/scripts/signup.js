@@ -16,11 +16,12 @@ signupForm.addEventListener("submit", async (event) => {
 
     if (res.status !== 200) {
       console.log(res);
-      return;
     }
 
     localStorage.setItem("user", res.data.user);
+    window.location.href = `${baseUrl}/app`;
   } catch (err) {
     console.error(err);
+    window.alert(err.response.data.error);
   }
 });

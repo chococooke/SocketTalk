@@ -25,7 +25,14 @@ module.exports.signup = async (req, res) => {
     });
 
     res.cookie("jw_token", token);
-    res.status(201).json({ message: "signed up successfully", user });
+    res.status(201).json({
+      message: "signed up successfully",
+      user: {
+        username: user.username,
+        email: user.email,
+        id: user.id,
+      },
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ Error: "Internal Server Error" });
